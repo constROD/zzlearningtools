@@ -14,9 +14,6 @@ export const Navbar: React.FC = () => {
           <Link href={ROUTES.HOME} className="hover:underline">
             Home
           </Link>
-          <Link href={ROUTES.ABOUT} className="hover:underline">
-            About
-          </Link>
         </ul>
         <div className="ml-auto flex gap-2">
           <Link href={ROUTES.HOME}>{user && user.email}</Link>
