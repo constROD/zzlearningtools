@@ -1,10 +1,11 @@
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RootLayout } from 'modules/layouts';
 import { type AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
-import { STAGE, STAGES } from 'shared/constants/environments';
+import { STAGES, env } from 'shared/constants/environments';
 import '../../styles/globals.css';
 
 export default function MyApp({ Component, pageProps }: AppProps<{ dehydratedState: unknown }>) {
@@ -23,23 +24,29 @@ export default function MyApp({ Component, pageProps }: AppProps<{ dehydratedSta
   return (
     <React.Fragment>
       <Head>
-        <title>Template Next TypeScript</title>
+        <title>Zack & Zoey Learning Tools</title>
 
         {/* <!-- Viewport --> */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
         {/* <!--  Primary --> */}
-        <meta name="title" content="constROD's Website" />
-        <meta name="description" content="constROD's Personal Website" />
-        <meta name="application_name" content="constROD's App" />
+        <meta name="title" content="Zack & Zoey Learning Tools" />
+        <meta
+          name="description"
+          content="Discover a wide range of innovative learning tools for kids that make education fun and engaging. Explore our expertly curated selection to boost your child's cognitive development, creativity, and problem-solving skills."
+        />
+        <meta name="application_name" content="Zack & Zoey Learning Tools" />
 
         {/* <!--  Open Graph / Facebook --> */}
-        <meta property="og:title" content="constROD's Website" />
+        <meta property="og:title" content="Zack & Zoey Learning Tools" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="constROD's Website" />
-        <meta property="og:url" content="https://constrod.me" />
-        <meta property="og:image" content="https://constrod.me/banner.png" />
-        <meta property="og:description" content="constROD's Personal Website" />
+        <meta property="og:site_name" content="Zack & Zoey Learning Tools" />
+        <meta property="og:url" content="https://zzlearningtools.com" />
+        <meta property="og:image" content="https://zzlearningtools.com/banner.png" />
+        <meta
+          property="og:description"
+          content="Discover a wide range of innovative learning tools for kids that make education fun and engaging. Explore our expertly curated selection to boost your child's cognitive development, creativity, and problem-solving skills."
+        />
 
         {/* <!--  Twitter --> */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -59,7 +66,7 @@ export default function MyApp({ Component, pageProps }: AppProps<{ dehydratedSta
           <RootLayout>
             <Component {...pageProps} />
           </RootLayout>
-          {STAGE === STAGES.Dev && <ReactQueryDevtools initialIsOpen={false} />}
+          {env.STAGE === STAGES.Dev && <ReactQueryDevtools initialIsOpen={false} />}
         </Hydrate>
       </QueryClientProvider>
     </React.Fragment>

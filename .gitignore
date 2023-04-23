@@ -27,6 +27,8 @@ dist
 
 # Remove the lock below if you're using npm
 *-lock.json
+# Remove the lock below if you're using pnpm
+*-lock.yaml
 # Remove the lock below if you're using yarn
 *.lock
 

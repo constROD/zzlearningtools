@@ -1,4 +1,6 @@
+import { AUTH_LS } from 'shared/constants/local-storages';
 import { type StoreResponse } from 'shared/types/store';
+import { setLocalStorage } from 'shared/utils';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -18,7 +20,7 @@ import { immer } from 'zustand/middleware/immer';
 
 export interface UserStore {
   /* States */
-  email: string | null;
+  user: { email: string } | null; // TODO: Add actual user info.
 
   /* Computed States */
   computed: {
@@ -26,33 +28,69 @@ export interface UserStore {
   };
 
   /* Functions */
-  login: (email: string) => StoreResponse;
+  verifySession: () => StoreResponse;
+  login: (args: { email: string; password: string }) => StoreResponse;
   logout: () => StoreResponse;
+  forgotPassword: (args: { email: string }) => Promise<StoreResponse>;
+  forgotPasswordConfirm: (args: {
+    email: string;
+    code: string;
+    newPassword: string;
+  }) => Promise<StoreResponse>;
+  changePassword: (args: { oldPassword: string; newPassword: string }) => Promise<StoreResponse>;
 }
 
 export const useUserStore = create(
   immer<UserStore>((set, get) => ({
     /* States */
-    email: null,
+    user: null,
 
     /* Computed */
     computed: {
       get isSignedIn() {
-        return !!get().email;
+        return !!get().user;
       },
     },
 
     /* Functions */
-    login: (email: string) => {
+    verifySession: () => {
+      try {
+        if (!get().user) return; // TODO: Temporary added to simulate the previous signed in state
+        // TODO: Check session and set user state
+        setLocalStorage(AUTH_LS.PrevSignedIn, true);
+      } catch (error) {
+        setLocalStorage(AUTH_LS.PrevSignedIn, false);
+      }
+    },
+
+    login: (args: { email: string; password: string }) => {
       set(state => {
-        state.email = email;
+        state.user = { email: args.email };
       });
+      get().verifySession();
     },
 
     logout: () => {
       set(state => {
-        state.email = null;
+        state.user = null;
       });
+      get().verifySession();
+      setLocalStorage(AUTH_LS.PrevSignedIn, false); // TODO: Temporary added to simulate the previous signed in state
+    },
+
+    forgotPassword: async (args: { email: string }) => {
+      // eslint-disable-next-line no-console
+      console.debug(args);
+    },
+
+    forgotPasswordConfirm: async (args: { email: string; code: string; newPassword: string }) => {
+      // eslint-disable-next-line no-console
+      console.debug(args);
+    },
+
+    changePassword: async (args: { oldPassword: string; newPassword: string }) => {
+      // eslint-disable-next-line no-console
+      console.debug(args);
     },
   }))
 );
