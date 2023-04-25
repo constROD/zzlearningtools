@@ -25,7 +25,10 @@
     "bossrodtv",
     "middlewares",
     "zack",
-    "zoey"
+    "zoey",
+    "sonarcloud",
+    "constrod",
+    "zzlearningtools"
   ],
   "ignorePaths": [
     "./node_modules",
