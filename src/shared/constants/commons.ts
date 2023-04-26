@@ -2,11 +2,18 @@ export const ROUTES = {
   LOGIN: '/login',
 
   HOME: '/',
-  ABC: '/abc',
-  NUMBERS: '/numbers',
-  COLORS: '/colors',
-  SHAPES: '/shapes',
-  ANIMALS: '/animals',
+  CHALLENGES: {
+    INDEX: '/challenges',
+    CHALLENGE1: '/challenges/challenge1',
+  },
+  LEARN: {
+    INDEX: '/learn',
+    ABC: '/learn/abc',
+    NUMBERS: '/learn/numbers',
+    COLORS: '/learn/colors',
+    SHAPES: '/learn/shapes',
+    ANIMALS: '/learn/animals',
+  },
 } as const;
 
 export const isServer = typeof window === 'undefined';

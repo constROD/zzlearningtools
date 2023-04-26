@@ -28,7 +28,8 @@
     "zoey",
     "sonarcloud",
     "constrod",
-    "zzlearningtools"
+    "zzlearningtools",
+    "daisyui"
   ],
   "ignorePaths": [
     "./node_modules",
